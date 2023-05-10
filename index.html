@@ -78,13 +78,18 @@
       depositBtn.addEventListener('click', function(){
         // deposit input
         const depositNumber = inputNumber('deposit-amount');
-      
-        // deposit output:
         document.getElementById('deposit-amount').value = "";
-        updateSpanText('current-deposit', depositNumber)
-        
-        // balance output:
-        updateSpanText('balanceTaka', depositNumber)
+        if(depositNumber < 0){
+          alert('hey!!.. You are pressing wrong number.')
+        }
+        else{
+          // deposit output:
+          updateSpanText('current-deposit', depositNumber);
+          
+          // balance output:
+          updateSpanText('balanceTaka', depositNumber);
+
+          }
       })
 
 
@@ -96,20 +101,26 @@
 
         // withdraw input:
         const withdrawAmount =inputNumber('withdrawAmount');
-        
-        // withdraw output:
-        updateSpanText('withdrawBalance', withdrawAmount)
         document.getElementById('withdrawAmount').value = "";
-
+        if(withdrawAmount< 0){
+          alert('hey!!... are you fool person??')
+        }
+        
+        else{
+          // withdraw output:
+          updateSpanText('withdrawBalance', withdrawAmount)
+        
         // after withdraw output of the main balance:
-        const withdraw = updateSpanText('balanceTaka', -1* withdrawAmount)
+        updateSpanText('balanceTaka', -1* withdrawAmount)
+         }
       })
+        
 
 
-      function updateSpanText(id, depositNumber){
+      function updateSpanText(id, addedNumber){
         const balance = document.getElementById(id).innerText;
         const balanceNumber = parseFloat(balance);
-        const totalBalance = depositNumber + balanceNumber;
+        const totalBalance = addedNumber + balanceNumber;
         document.getElementById(id).innerText = totalBalance;
       }
 
